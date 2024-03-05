@@ -31,36 +31,43 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 26.sp,
+        letterSpacing = 0.5.sp
     ),
     bodyMedium = TextStyle(
         fontFamily = PoppinsFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     ),
     bodySmall = TextStyle(
         fontFamily = PoppinsFamily,
         fontWeight = FontWeight.Light,
         fontSize = 16.sp,
         lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     ),
     headlineLarge = TextStyle(
         fontFamily = PoppinsFamily,
         fontWeight = FontWeight.Light,
         fontSize = 64.sp,
         lineHeight = 85.sp,
+        letterSpacing = 0.5.sp
     ),
     titleLarge = TextStyle(
         fontFamily = PoppinsFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         lineHeight = 40.sp,
+        letterSpacing = 0.5.sp
+
     ),
     titleMedium = TextStyle(
         fontFamily = PoppinsFamily,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Medium,
         fontSize = 24.sp,
         lineHeight = 30.sp,
+        letterSpacing = 0.5.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
