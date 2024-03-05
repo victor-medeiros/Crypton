@@ -1,9 +1,10 @@
-package com.victor.crypton
+package com.victor.crypton.presentation
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +37,10 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.victor.crypton.R
+import com.victor.crypton.presentation.util.Screens
 import com.victor.crypton.ui.theme.CryptonTheme
 import com.victor.crypton.ui.theme.Gray100
 import com.victor.crypton.ui.theme.Gray400
@@ -46,7 +51,9 @@ import com.victor.crypton.ui.theme.Purple700
 import com.victor.crypton.ui.theme.Purple900
 
 @Composable
-fun LandingScreen() {
+fun LandingScreen(
+    navController: NavController
+) {
     val largeRadialGradient: Brush = object : ShaderBrush() {
         override fun createShader(size: Size): Shader {
             val biggerDimension = maxOf(size.height, size.width)
@@ -103,6 +110,7 @@ fun LandingScreen() {
                 modifier = Modifier
                     .height(90.dp)
                     .clip(CircleShape)
+                    .clickable { navController.navigate(Screens.REGISTRATION.route) }
                     .border(
                         width = 2.dp,
                         brush = Brush.verticalGradient(listOf(LimeGreen, Purple200)),
@@ -138,7 +146,8 @@ fun LandingScreen() {
 )
 @Composable
 fun LandingPreview() {
+    val navController = rememberNavController()
     CryptonTheme {
-        LandingScreen()
+        LandingScreen(navController)
     }
 }

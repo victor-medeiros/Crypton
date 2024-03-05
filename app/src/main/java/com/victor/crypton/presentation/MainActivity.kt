@@ -1,14 +1,11 @@
-package com.victor.crypton
+package com.victor.crypton.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.victor.crypton.ui.theme.CryptonTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,12 +14,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             CryptonTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    LandingScreen()
-                }
+                val navController = rememberNavController()
+                NavGraph(navController = navController)
             }
         }
     }
@@ -31,7 +24,8 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     CryptonTheme {
-        LandingScreen()
+        NavGraph(navController = navController)
     }
 }
