@@ -9,10 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,14 +32,17 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.victor.crypton.R
+import com.victor.crypton.presentation.util.Screens
 import com.victor.crypton.ui.theme.CryptonTheme
-import com.victor.crypton.ui.theme.LimeGreen
-import com.victor.crypton.ui.theme.LimeGreen100
+import com.victor.crypton.ui.theme.PrimaryDefault
+import com.victor.crypton.ui.theme.PrimaryLight
 
 @Composable
 fun RegistrationScreen(
@@ -60,17 +64,21 @@ fun RegistrationScreen(
     ) {
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(
-                imageVector = Icons.Filled.ArrowBack,
+                imageVector = Icons.Filled.Close,
                 contentDescription = "Back",
                 tint = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.size(32.dp)
             )
         }
+
         Text(
-            text = "What is your name?",
+            text = stringResource(id = R.string.registration_title),
             color = MaterialTheme.colorScheme.onBackground,
-            style = MaterialTheme.typography.titleLarge.copy(textAlign = TextAlign.Center)
+            style = MaterialTheme.typography.titleMedium
         )
+
         Spacer(modifier = Modifier.height(100.dp))
+
         BasicTextField(
             value = userName,
             onValueChange = { userName = it },
@@ -82,25 +90,41 @@ fun RegistrationScreen(
                 .align(Alignment.CenterHorizontally)
                 .focusRequester(focusRequester),
         )
+
         Spacer(modifier = Modifier.weight(1f))
-        Box(
-            modifier = Modifier
-                .clickable {  }
-                .clip(CircleShape)
-                .background(Brush.verticalGradient(listOf(LimeGreen, LimeGreen100)))
-                .fillMaxWidth()
-                .height(70.dp),
-        ) {
-            Text(
-                text = "Confirm",
-                color = MaterialTheme.colorScheme.onPrimary,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.align(Alignment.Center),
-            )
-        }
+
+        PrimaryButton(
+            text = stringResource(id = R.string.button_confirm),
+            onClick = { navController.navigate(Screens.HOME.route) }
+        )
     }
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
+    }
+}
+
+@Composable
+fun PrimaryButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    color: Brush = Brush.verticalGradient(listOf(PrimaryDefault, PrimaryLight)),
+    onClick: () -> Unit = {}
+) {
+    Box(
+        modifier = Modifier
+            .clickable { onClick() }
+            .clip(CircleShape)
+            .background(color)
+            .fillMaxWidth()
+            .height(70.dp)
+            .then(modifier),
+    ) {
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.align(Alignment.Center),
+        )
     }
 }
 
