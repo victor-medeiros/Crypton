@@ -2,6 +2,12 @@
     <string name="app_name">Crypton</string>
 
     <string name="button_get_started">Get started</string>
+
     <string name="registration_title">How would you like to be called?</string>
     <string name="button_confirm">Confirm</string>
+
+    <string name="home_greeting">Hi, %s</string>
+    <string name="home_welcome">welcome back</string>
+    <string name="home_market">Market</string>
+    <string name="decimal_format">R$ #,##0.00</string>
 </resources>

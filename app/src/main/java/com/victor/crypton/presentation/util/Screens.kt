@@ -22,5 +22,13 @@ enum class Screens(
         composable = { navController ->
             RegistrationScreen(navController = navController)
         }
+    ),
+    HOME(
+        route = "home",
+        composable = { navController ->
+            HomeScreen(
+                navController = navController
+            )
+        }
     )
 }
