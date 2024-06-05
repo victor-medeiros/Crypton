@@ -1,7 +1,10 @@
 package com.victor.crypton.presentation.util
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.victor.crypton.presentation.HomeScreen
+import com.victor.crypton.presentation.HomeViewModel
 import com.victor.crypton.presentation.LandingScreen
 import com.victor.crypton.presentation.RegistrationScreen
 
@@ -27,7 +30,8 @@ enum class Screens(
         route = "home",
         composable = { navController ->
             HomeScreen(
-                navController = navController
+                navController = navController,
+                homeViewModel = hiltViewModel<HomeViewModel>()
             )
         }
     )
