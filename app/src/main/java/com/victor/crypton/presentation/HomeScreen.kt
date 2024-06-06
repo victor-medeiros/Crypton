@@ -138,7 +138,7 @@ private fun CryptoCoinCard(cryptoCoin: CryptoCoin) {
             AsyncImage(
                 model = cryptoCoin.logo,
                 contentDescription = cryptoCoin.name,
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(40.dp).clip(CircleShape),
                 placeholder = painterResource(id = R.drawable.crypto_icon_default),
                 error = painterResource(id = R.drawable.crypto_icon_default)
             )

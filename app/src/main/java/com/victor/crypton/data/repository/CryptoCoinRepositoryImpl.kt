@@ -25,14 +25,11 @@ class CryptoCoinRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCryptoLogos(symbols: String): Resource<List<Pair<String, String>>> {
+    override suspend fun getCryptoLogos(symbols: String): Resource<Map<String, String>> {
         return try {
             val response = coinMarketCapApi.getCryptoLogos(symbols)
             if (response.isSuccessful) {
-                val data = response.body()!!.data.map {
-                    Pair(it.first, it.second[0].logo)
-                }
-                Resource.Success(value = data)
+                Resource.Success(value = response.body()!!.data.mapValues { it.value[0].logo })
             } else {
                 Resource.Failure("$UNEXPECTED_ERROR ${response.message()}")
             }

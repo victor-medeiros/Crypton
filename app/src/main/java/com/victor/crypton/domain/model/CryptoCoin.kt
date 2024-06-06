@@ -6,6 +6,6 @@ data class CryptoCoin(
     val id: Long,
     val name: String,
     val symbol: String,
-    val logo: String = "",
+    var logo: String = "",
     val currency: BigDecimal
 )

@@ -25,6 +25,15 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun fetchCurrentCurrency(): Resource<List<CryptoCoin>> {
         val response = cryptoCoinRepository.getCurrentCurrency()
+        if (response is Resource.Success) {
+            val symbols = response.value.joinToString(separator = ",") { it.symbol }
+            val logosResponse = cryptoCoinRepository.getCryptoLogos(symbols)
+            if (logosResponse is Resource.Success) {
+                response.value.forEach { cryptoCoin ->
+                    cryptoCoin.logo = logosResponse.value[cryptoCoin.symbol] ?: ""
+                }
+            }
+        }
         return response
     }
 }
