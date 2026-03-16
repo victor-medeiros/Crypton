@@ -31,7 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.victor.crypton.R
 import com.victor.crypton.domain.model.CryptoCoin
@@ -41,7 +41,7 @@ import com.victor.crypton.ui.theme.DarkGray
 import java.math.BigDecimal
 
 @Composable
-fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
+fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
     val cryptoCoin by homeViewModel.cryptoCoins.collectAsState()
 
     Column(

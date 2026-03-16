@@ -35,17 +35,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.victor.crypton.R
-import com.victor.crypton.presentation.util.Screens
 import com.victor.crypton.ui.theme.CryptonTheme
 import com.victor.crypton.ui.theme.PrimaryDefault
 import com.victor.crypton.ui.theme.PrimaryLight
 
 @Composable
 fun RegistrationScreen(
-    navController: NavController
+    onClose: () -> Unit,
+    onNext: () -> Unit
 ) {
     var userName by remember { mutableStateOf("") }
     val focusRequester = remember {
@@ -61,7 +59,7 @@ fun RegistrationScreen(
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp),
     ) {
-        IconButton(onClick = { navController.popBackStack() }) {
+        IconButton(onClick = onClose) {
             Icon(
                 painter = painterResource(R.drawable.ic_close),
                 contentDescription = "Back",
@@ -94,7 +92,7 @@ fun RegistrationScreen(
 
         PrimaryButton(
             text = stringResource(id = R.string.button_confirm),
-            onClick = { navController.navigate(Screens.HOME.route) }
+            onClick = onNext
         )
     }
     LaunchedEffect(Unit) {
@@ -130,8 +128,7 @@ fun PrimaryButton(
 @Preview(showSystemUi = true)
 @Composable
 fun RegistrationScreenPreview() {
-    val navController = rememberNavController()
     CryptonTheme {
-        RegistrationScreen(navController)
+        RegistrationScreen({}, {})
     }
 }

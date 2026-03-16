@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
 import com.victor.crypton.ui.theme.CryptonTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,9 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CryptonTheme {
-                // A surface container using the 'background' color from the theme
-                val navController = rememberNavController()
-                NavGraph(navController = navController)
+                NavGraph()
             }
         }
     }
@@ -26,8 +23,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
-    val navController = rememberNavController()
     CryptonTheme {
-        NavGraph(navController = navController)
+        NavGraph()
     }
 }

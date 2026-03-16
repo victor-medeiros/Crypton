@@ -1,18 +1,32 @@
 package com.victor.crypton.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.victor.crypton.presentation.util.Screens
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
+import com.victor.crypton.presentation.util.Routes
 
 @Composable
-fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screens.LANDING.route) {
-        Screens.entries.forEach { screen ->
-            composable(screen.route) {
-                screen.composable(navController)
+fun NavGraph() {
+    val backStack = rememberNavBackStack(Routes.Landing)
+
+    NavDisplay(
+        entryDecorators = listOf(
+            rememberSaveableStateHolderNavEntryDecorator(),
+            rememberViewModelStoreNavEntryDecorator()
+        ),
+        backStack = backStack,
+        entryProvider = entryProvider {
+            entry<Routes.Landing> { LandingScreen(onNext = { backStack.add(Routes.Registration) }) }
+            entry<Routes.Registration> {
+                RegistrationScreen(
+                    onClose = { backStack.remove(Routes.Registration) },
+                    onNext = { backStack.add(Routes.Home) }
+                )
             }
+            entry<Routes.Home> { HomeScreen() }
         }
-    }
+    )
 }

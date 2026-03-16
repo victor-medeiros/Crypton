@@ -34,10 +34,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.victor.crypton.R
-import com.victor.crypton.presentation.util.Screens
 import com.victor.crypton.ui.theme.BlackTransparent35
 import com.victor.crypton.ui.theme.CryptonTheme
 import com.victor.crypton.ui.theme.LightGray
@@ -49,7 +46,7 @@ import com.victor.crypton.ui.theme.WhiteTransparent20
 
 @Composable
 fun LandingScreen(
-    navController: NavController
+    onNext: () -> Unit
 ) {
     val largeRadialGradient: Brush = object : ShaderBrush() {
         override fun createShader(size: Size): Shader {
@@ -64,7 +61,7 @@ fun LandingScreen(
     }
     LandingContent(
         modifier = Modifier.background(largeRadialGradient),
-        onButtonClick = { navController.navigate(Screens.REGISTRATION.route) }
+        onButtonClick = onNext
     )
 }
 
@@ -158,8 +155,7 @@ fun TransparentButton(
 )
 @Composable
 fun LandingPreview() {
-    val navController = rememberNavController()
     CryptonTheme {
-        LandingScreen(navController)
+        LandingScreen {}
     }
 }
